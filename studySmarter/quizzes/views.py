@@ -10,3 +10,8 @@ def profile(request):
 
 def quiz(request):
     return render(request, 'quizzes/quiz.html')
+
+
+def quiz_views(request):
+    questions = questions.objects.all()
+    return render(render, "quiz.html", {"questions": questions})

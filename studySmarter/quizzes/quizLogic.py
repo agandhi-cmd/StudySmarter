@@ -39,10 +39,13 @@ class Quiz:
         self.questions.append(question)
 
     def run(self):
-        score = 0 
+        for question in self.questions:
+            user_answer = input(question.text + " ")
 
-        for q in self.questions:
-            print(q.text)
+            if question.check_answer(user_answer):
+                print("correct!")
+                self.score += 1 
+            else:
+                print("wrong!")
 
-            if hasattr(q, "options"):
-                pass
+        print(f"Final score: {self.score}/{len(self.questions)}")
