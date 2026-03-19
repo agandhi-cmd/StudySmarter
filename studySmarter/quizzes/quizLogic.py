@@ -29,3 +29,20 @@ class shortAnswer(Question):
 
     def checkAnswer(self, answer):
         return answer == self.correctAnswer
+
+class Quiz:
+    def __init__(self, title):
+        self.title = title 
+        self.questions = []
+
+    def add_questions(self, question):
+        self.questions.append(question)
+
+    def run(self):
+        score = 0 
+
+        for q in self.questions:
+            print(q.text)
+
+            if hasattr(q, "options"):
+                pass
