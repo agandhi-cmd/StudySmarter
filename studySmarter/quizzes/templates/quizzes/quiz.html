@@ -1,10 +1,30 @@
-{% extends 'quizzes/main.html' %}
 
-{% block content %}
 
-<p>quizzes</p>
+<h1>Quiz</h1>
 
-{%endblock%}
+<form method="post">
+  {% csrf_token %}
 
-<!-- Page will show quizzes that have been made or can create new quizzes
- either multiple choice, true or false or short answer-->
+  {% for q in questions %}
+    <div>
+      <p>{{ q.text }}</p>
+
+      {% if q.question_type == "MCQ" %}
+        <input type="radio" name="q{{ q.id }}" value="{{ q.option1 }}"> {{ q.option1 }}<br>
+        <input type="radio" name="q{{ q.id }}" value="{{ q.option2 }}"> {{ q.option2 }}<br>
+        <input type="radio" name="q{{ q.id }}" value="{{ q.option3 }}"> {{ q.option3 }}<br>
+        <input type="radio" name="q{{ q.id }}" value="{{ q.option4 }}"> {{ q.option4 }}<br>
+      
+      {% elif q.question_type == "SA" %}
+        <input type="text" name="q{{ q.id }}">
+      
+      {% elif q.question_type == "TF" %}
+        <input type="radio" name="q{{ q.id }}" value="True"> True
+        <input type="radio" name="q{{ q.id }}" value="False"> False
+      {% endif %}
+
+    </div>
+  {% endfor %}
+
+  <button type="submit">Submit</button>
+</form>
